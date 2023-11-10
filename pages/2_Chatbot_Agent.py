@@ -8,8 +8,9 @@ from langchain.callbacks import StreamlitCallbackHandler
 
 from langchain.tools import WikipediaQueryRun
 from langchain.utilities import WikipediaAPIWrapper
+from langchain.tools import PythonREPLTool
 
-from langchain.tools import PythonREPLToo
+from langchain.utilities import ArxivAPIWrapper
 
 st.set_page_config(page_title="ChatWeb", page_icon="🌐")
 st.header('Chatbot with Web Browser Access')
@@ -71,12 +72,11 @@ class ChatbotTools:
     #     )
     #     return agent
 
-# 1 b) Second Shiba
-def setup_agent(self):
+    # 1 b) Second Shiba
+    def setup_agent(self):
         # Define tool
         ddg_search = DuckDuckGoSearchRun()
-        wiki_agent = WikipediaQueryRun(api_wrapper =
-        WikipediaAPIWrapper())
+        wiki_agent = WikipediaQueryRun(api_wrapper =WikipediaAPIWrapper())
         python_repl = PythonREPLTool()
         tools = [
             Tool(
@@ -104,9 +104,6 @@ def setup_agent(self):
         )
         return agent
 
-
-
-
     @utils.enable_chat_history
     def main(self):
         agent = self.setup_agent()
@@ -122,7 +119,6 @@ def setup_agent(self):
                     st.write(response)
                 except Exception as e:
                     print(e)
-
 
 
 if __name__ == "__main__":
